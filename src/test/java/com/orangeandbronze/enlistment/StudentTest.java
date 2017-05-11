@@ -8,6 +8,7 @@ public class StudentTest {
 	@Test
 	public void prequisiteTest(){
 		Student student = new Student(1);
+		
 		Subject subject1 = new Subject("Math01", "NONE");
 		Subject subject2 = new Subject("Math02", "Math01");
 		Subject subject3 = new Subject("Math03", "Math02");
@@ -24,9 +25,12 @@ public class StudentTest {
 		Section IB = new Section("IB", subject1, schedule2, room2);
 		Section IC = new Section("IC", subject2, schedule3, room3);
 		
+		Semester semester1 = new Semester(2017, Term.FIRSTSEMESTER);
+		
+		student.createEnlistmentForSemester(semester1);
 		student.enlist(IA);
-		student.finishedSubjects.add("Math01");
-		student.enlist(IC);
+		student.enlist(IB);
+		//student.enlist(IC);
 	}
 
 }
