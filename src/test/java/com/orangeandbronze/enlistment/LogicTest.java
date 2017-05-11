@@ -1,10 +1,11 @@
 package com.orangeandbronze.enlistment;
 
-import org.junit.Test;
+import org.junit.*;
 
 public class LogicTest {
 
 	@Test
+	@Ignore
 	public void test() {
 		Student student = new Student(10);
 		Schedule schedule1 = new Schedule(Days.MON_THU, Periods.H0830_H1000);
