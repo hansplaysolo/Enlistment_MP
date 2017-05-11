@@ -3,15 +3,17 @@ package com.orangeandbronze.enlistment;
 public class Section {
 	
 	private final String sectionID;
+	private final Subject subjectID;
 	private final Schedule schedule;
 	private final Room room;
 	private int numberOfStudents;
 	
-	public Section(String sectionID, Schedule schedule, Room room) {
+	public Section(String sectionID, Subject subjectID, Schedule schedule, Room room) {
 		if (!sectionID.matches("[A-Za-z0-9]+")) {
 			throw new IllegalArgumentException("Section ID should be alpha-numeric. Was: " + sectionID);
 		}
 		this.sectionID = sectionID;
+		this.subjectID = subjectID;
 		this.schedule = schedule;
 		this.room = room;
 		this.numberOfStudents = 0;

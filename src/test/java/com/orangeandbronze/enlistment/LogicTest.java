@@ -19,13 +19,13 @@ public class LogicTest {
 		Subject subject6 = new Subject("Math06", "Math06");
 
 		//Initialize Sections
-		Section IA = new Section("IA", schedule1, room1);
-		Section IB = new Section("IB", schedule1, room1);
-		Section IC = new Section("IC", schedule1, room1);
-		Section ID = new Section("ID", schedule1, room1);
-		Section IE = new Section("IE", schedule1, room1);
-		Section IF = new Section("IF", schedule1, room1);
-
+		Section IA = new Section("IA", subject1, schedule1, room1);
+		Section IB = new Section("IB", subject2, schedule1, room1);
+		Section IC = new Section("IC", subject3, schedule1, room1);
+		Section ID = new Section("ID", subject4, schedule1, room1);
+		Section IE = new Section("IE", subject5, schedule1, room1);
+		Section IF = new Section("IF", subject6, schedule1, room1);
+		
 		student.enlist(IA);
 	
 	}

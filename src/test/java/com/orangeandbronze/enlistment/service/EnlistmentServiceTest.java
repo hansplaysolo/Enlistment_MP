@@ -8,6 +8,7 @@ import com.orangeandbronze.enlistment.Room;
 import com.orangeandbronze.enlistment.Schedule;
 import com.orangeandbronze.enlistment.Section;
 import com.orangeandbronze.enlistment.Student;
+import com.orangeandbronze.enlistment.Subject;
 import com.orangeandbronze.enlistment.DAO.SectionDAO;
 import com.orangeandbronze.enlistment.DAO.StudentDAO;
 
@@ -20,7 +21,8 @@ public class EnlistmentServiceTest {
 		Schedule schedule_SEC01 = new Schedule(Days.MON_THU, Periods.H0830_H1000);
 		Room room_SEC01 = new Room("SEC01", 30);
 		
-		Section section_SEC01 = new Section("SEC01", schedule_SEC01, room_SEC01);
+		Subject subject1 = new Subject("math01", "NONE");
+		Section section_SEC01 = new Section("SEC01", subject1, schedule_SEC01, room_SEC01);
 		
 		EnlistmentService enlistmentService = new EnlistmentService();
 		
