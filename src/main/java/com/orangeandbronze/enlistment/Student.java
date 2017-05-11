@@ -7,6 +7,9 @@ public class Student {
 	
 	private final int studentNumber;
 	private Collection<Section> enlistedSection = new HashSet<>();
+	
+	//private Collection<String> finishEnlistedSubjects = new HashSet<>();
+	
 	public Student (int studentNumber) {
 		
 		if (studentNumber < 0) {

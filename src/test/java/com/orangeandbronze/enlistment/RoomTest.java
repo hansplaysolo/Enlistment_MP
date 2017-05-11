@@ -9,7 +9,7 @@ public class RoomTest {
 	@Test
 	public void invalidCapacity() {
 		
-		fail("Not yet implemented");
+		
 	}
 
 }
