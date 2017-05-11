@@ -3,17 +3,17 @@ package com.orangeandbronze.enlistment;
 public class Section {
 	
 	private final String sectionID;
-	private final Subject subjectID;
+	private final Subject subject;
 	private final Schedule schedule;
 	private final Room room;
 	private int numberOfStudents;
 	
-	public Section(String sectionID, Subject subjectID, Schedule schedule, Room room) {
+	public Section(String sectionID, Subject subject, Schedule schedule, Room room) {
 		if (!sectionID.matches("[A-Za-z0-9]+")) {
 			throw new IllegalArgumentException("Section ID should be alpha-numeric. Was: " + sectionID);
 		}
 		this.sectionID = sectionID;
-		this.subjectID = subjectID;
+		this.subject = subject;
 		this.schedule = schedule;
 		this.room = room;
 		this.numberOfStudents = 0;
@@ -24,6 +24,14 @@ public class Section {
 			throw new RoomCapacityException("Cannot add more students inside this " + room.getName() + " room. Section Capacity: " + numberOfStudents + " Room Capacity: " + room.getCapacity());
 		}
 		numberOfStudents++;
+	}
+	
+	public String getSubjectID(){
+		return subject.getSubjectID();
+	}
+	
+	public String getSubjectPrerequisite(){
+		return subject.getPrequisite();
 	}
 	
 	public void hasConflict(Section other){

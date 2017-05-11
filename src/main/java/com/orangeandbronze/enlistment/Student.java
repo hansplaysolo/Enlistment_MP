@@ -3,12 +3,13 @@ package com.orangeandbronze.enlistment;
 import java.util.Collection;
 import java.util.HashSet;
 
+import org.w3c.dom.ranges.RangeException;
+
 public class Student {
 	
 	private final int studentNumber;
 	private Collection<Section> enlistedSection = new HashSet<>();
-	
-	//private Collection<String> finishEnlistedSubjects = new HashSet<>();
+	public Collection<String> finishedSubjects = new HashSet<>();
 	
 	public Student (int studentNumber) {
 		
@@ -30,6 +31,21 @@ public class Student {
 		
 		for (Section s: this.enlistedSection) {
 			s.hasConflict(section);
+			if (s.getSubjectID().equals(section.getSubjectID())) {
+				throw new RuntimeException("You cannot add the same subject");
+			}
+		}
+		
+		if (this.finishedSubjects.size() > 0) {
+			for (String s: this.finishedSubjects) {
+				if (s.equals(section.getSubjectPrerequisite())) {
+					throw new RuntimeException("You cannot add this subject because you already finish it");
+				}
+			}
+		}else{
+			if (!section.getSubjectPrerequisite().toUpperCase().equals("NONE")) {
+				throw new RuntimeException("You cannot add this subject because you haven't finish it");
+			}
 		}
 		
 		section.incrementNumberOfStudents();
