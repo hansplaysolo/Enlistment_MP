@@ -8,7 +8,7 @@ public class SubjectTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void createSubject_notAlphanumeric() {
-		new Subject("!@#$%^^%");
+		new Subject("!@#$%^^%", "none");
 	}
 
 }

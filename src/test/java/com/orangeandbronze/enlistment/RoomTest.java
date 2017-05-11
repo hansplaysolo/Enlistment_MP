@@ -6,9 +6,9 @@ import org.junit.Test;
 
 public class RoomTest {
 
-	@Test
-	public void invalidCapacity() {
-		///Constructor test
+	@Test(expected=IllegalArgumentException.class)
+	public void createRoom_notAlphanumeric() {
+		new Room("!@#$$%^^&", 10);
 	}
 
 }

@@ -2,10 +2,6 @@ package com.orangeandbronze.enlistment;
 
 public enum Days {
 	MON_THU,
-	TUE,
-	WED,
-	THURS,
-	FRI,
-	SAT,
-	SUN
+	TUE_FRI,
+	WED_SAT,
 }
