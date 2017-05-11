@@ -1,0 +1,15 @@
+package com.orangeandbronze.enlistment;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class RoomTest {
+
+	@Test
+	public void invalidCapacity() {
+		
+		fail("Not yet implemented");
+	}
+
+}
