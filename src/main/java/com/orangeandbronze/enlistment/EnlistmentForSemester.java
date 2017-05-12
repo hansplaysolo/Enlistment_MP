@@ -19,13 +19,7 @@ public class EnlistmentForSemester {
 	}
 	
 	public boolean isOpen(){
-		
-		if (semesterState == SemesterState.OPEN) {
-			return true;
-		}else{
-			return false;
-		}
-		
+		return (semesterState == SemesterState.OPEN) ? true : false;
 	}
 	
 	public void addStudentSection(Student student, Section section){
@@ -39,7 +33,6 @@ public class EnlistmentForSemester {
 			if (en.semesterState == SemesterState.CLOSED) {
 				for (Section sc : en.getEnlistedSection()) {
 					sc.checkSubjectConflict(section);
-					//sc.hasSemesterConflict(section);
 					matchSuccess = sc.checkSubjectPrerequisite(en.getEnlistedSection(), section);
 				}
 			}
