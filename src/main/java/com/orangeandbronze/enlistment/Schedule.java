@@ -8,7 +8,7 @@ public class Schedule {
 	
 	public Schedule(Days days, Time startTime, Time endTime){
 		if(startTime.ordinal() >= endTime.ordinal()){
-			throwScheduleConflictException();
+			throw new ScheduleConflictException("End time: " + endTime +"must be later than start time: " + startTime);
 		}
 		
 		this.days = days;
@@ -20,22 +20,19 @@ public class Schedule {
 		int thisST = this.startTime.ordinal();
 		int thisET = this.endTime.ordinal();
 		
-		int otherST = this.startTime.ordinal();
-		int otherET = this.endTime.ordinal();
+		int otherST = other.startTime.ordinal();
+		int otherET = other.endTime.ordinal();
 		
 		if (this.equals(other)) {
-			throwScheduleConflictException();
+			//throwScheduleConflictException();
 		}
 		
-		if (otherST >= thisST && otherST <= thisET ) {
-			throwScheduleConflictException();
+		if (otherST > thisST && otherST < thisET ) {
+			throw new ScheduleConflictException("Start time: " + other.startTime + " is overlapping in schedule " + this.startTime + "-" +this.endTime);
 		}
 		
 	}
 	
-	private void throwScheduleConflictException() {
-		throw new ScheduleConflictException("End time: " + endTime +"must be later than start time: " + startTime);
-	}
 	
 	@Override
 	public int hashCode() {
