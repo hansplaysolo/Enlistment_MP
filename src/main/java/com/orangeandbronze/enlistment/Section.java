@@ -1,53 +1,100 @@
 package com.orangeandbronze.enlistment;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 public class Section {
 	
 	private final String sectionID;
 	private final Subject subject;
 	private final Schedule schedule;
 	private final Room room;
-	private int numberOfStudents;
+	private final Semester semester;
+	private Collection<Student> students = new HashSet<Student>(); 
 	
-	public Section(String sectionID, Subject subject, Schedule schedule, Room room) {
-		if (!sectionID.matches("[A-Za-z0-9]+")) {
+	public Section(String sectionID, Subject subject, Semester semester, Schedule schedule, Room room) {
+		
+		if (!sectionID.matches("[a-zA-Z0-9]+")) {
 			throw new IllegalArgumentException("Section ID should be alpha-numeric. Was: " + sectionID);
 		}
 		this.sectionID = sectionID;
 		this.subject = subject;
 		this.schedule = schedule;
 		this.room = room;
-		this.numberOfStudents = 0;
+		this.semester = semester;
+		
 	}
 	
-	public void incrementNumberOfStudents(){
-		if (numberOfStudents >= room.getCapacity()) {
-			throw new RoomCapacityException("Cannot add more students inside this " + room.getName() + " room. Section Capacity: " + numberOfStudents + " Room Capacity: " + room.getCapacity());
+	public void incrementNumberOfStudents(Student student){
+		
+		if (students.size() >= room.getCapacity()) {
+			throw new RoomCapacityException("Cannot add more students inside this " + 
+											room.getName() + " room. Section Capacity: " + 
+											students.size() + " Room Capacity: " + 
+											room.getCapacity());
 		}
-		numberOfStudents++;
+		students.add(student);
+		
 	}
 	
-	public String getSubjectID(){
-		return subject.getSubjectID();
+	public void hasSemesterSubjectConflict(Section other){
+		this.semester.conflictWith(other.semester);
 	}
 	
-	public String getSubjectPrerequisite(){
-		return subject.getPrequisite();
+	public void hasSemesterConflict(Section other){
+		this.semester.conflictWith(other.semester);
+	}
+	
+	public void hasSubjectConflict(Section other){
+		this.subject.conflictWith(other.subject);
+	}
+	
+	public void hasScheduleConflict(Section other){
+		this.schedule.conflictWith(other.schedule);
+	}
+	
+	public boolean checkSubjectPrerequisite(Collection<Section> enlistedSection, Section other){
+		
+		int successValue = 0;
+		Collection<String> otherPrerequisite = other.subject.getPrequisite();
+				
+		for (Section section : enlistedSection) {
+			for (String requirements : otherPrerequisite) {	
+				if (!requirements.equals("NONE")) {
+					if (section.subject.getSubjectID().equals(requirements)) {
+						successValue += 1;
+					}
+				}
+			}
+		}
+		
+		if (successValue == otherPrerequisite.size()) {
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+	
+	public void checkSubjectPrerequisiteMatchSuccess(boolean matchSuccess){
+		for (String requirements : this.subject.getPrequisite()) {
+			if (!requirements.equals("NONE")) {
+				if (!matchSuccess) {
+					throw new SubjectException("The student does not have this prerequisite subject: " + this.subject.getPrequisite());
+				}
+			}
+		}
 	}
 	
 	public void hasConflict(Section other){
-		this.schedule.conflictWith(other.schedule);
-	}
-
-	@Override
-	public String toString() {
-		return "Section [sectionID=" + sectionID + ", schedule=" + schedule + "]";
+		hasScheduleConflict(other);
+		hasSubjectConflict(other);
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((schedule == null) ? 0 : schedule.hashCode());
 		result = prime * result + ((sectionID == null) ? 0 : sectionID.hashCode());
 		return result;
 	}
@@ -61,11 +108,6 @@ public class Section {
 		if (getClass() != obj.getClass())
 			return false;
 		Section other = (Section) obj;
-		if (schedule == null) {
-			if (other.schedule != null)
-				return false;
-		} else if (!schedule.equals(other.schedule))
-			return false;
 		if (sectionID == null) {
 			if (other.sectionID != null)
 				return false;
@@ -74,4 +116,11 @@ public class Section {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Section [sectionID=" + sectionID + ", subject=" + subject + "]";
+	}
+	
+	
+	
 }

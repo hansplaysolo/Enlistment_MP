@@ -4,45 +4,63 @@ import java.util.Collection;
 import java.util.HashSet;
 
 public class EnlistmentForSemester {
-	private Semester semester;
-	private Collection<Section> enlistedSection = new HashSet<>();
+
+	private SemesterState semesterState;
+	private final Collection<Section> enlistedSection = new HashSet<>();
 	
+	public EnlistmentForSemester(SemesterState semesterState) {
+		this.semesterState = semesterState;
+	}
 	
-	public EnlistmentForSemester(Semester semester){
-		this.semester = semester;
+	public Collection<Section> getEnlistedSection(){
+		
+		return new HashSet<>(enlistedSection);
+		
+	}
+	
+	public boolean isOpen(){
+		if (semesterState == SemesterState.OPEN) {
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	public void addStudentSection(Student student, Section section){
+		
 		if (this.enlistedSection.contains(section)) {
-			throw new RuntimeException("Enlisted already inside section: " + section);
+			throw new EnlistmentConflictingException("This " + section + " is already inside of " + this);
 		}
 		
-		for (Section s: this.enlistedSection) {
-			s.hasConflict(section);
-			if (s.getSubjectID().equals(section.getSubjectID())) {
-				throw new RuntimeException("You cannot add the same subject");
-			}
-		}
-		
-		if (student.getFinishedSubjects().size() > 0) {
-			for (String s: student.getFinishedSubjects()) {
-				if (s.equals(section.getSubjectPrerequisite())) {
-					throw new RuntimeException("You cannot add this subject because you already finish it");
+		boolean matchSuccess = false;
+		for (EnlistmentForSemester en : student.getStudentSemesterRecords()) {
+			if (en.semesterState == SemesterState.CLOSED) {
+				for (Section sc : en.getEnlistedSection()) {
+					sc.hasSemesterConflict(section);
+					sc.hasSubjectConflict(section);
+					matchSuccess = sc.checkSubjectPrerequisite(en.getEnlistedSection(), section);
 				}
 			}
-		}else{
-			if (!section.getSubjectPrerequisite().toUpperCase().equals("NONE")) {
-				throw new RuntimeException("You cannot add this subject because you haven't finish it");
-			}
 		}
 		
-		section.incrementNumberOfStudents();
+		section.checkSubjectPrerequisiteMatchSuccess(matchSuccess);
+		
+		for (Section sc: this.enlistedSection) {
+			sc.hasConflict(section);
+		}
+		
+		section.incrementNumberOfStudents(student);
 		this.enlistedSection.add(section);
+		
 	}
 	
-	public void setFinishedSubjects(Student student) {
-		for (Section s : enlistedSection) {
-			student.addFinishSubject(s.getSubjectID());
-		}
+	public void closeSemester(){
+		this.semesterState = semesterState.CLOSED;
 	}
+	
+	@Override
+	public String toString() {
+		return "EnlistmentForSemester [semesterState=" + semesterState + ", enlistedSection=" + enlistedSection + "]";
+	}
+
 }
