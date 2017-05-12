@@ -12,7 +12,7 @@ import org.junit.Test;
 public class StudentTest {
 	
 	//this part of test have not been refined.
-	@Test
+	/*@Test
 	public void prequisiteTest(){
 		Semester semester1 = new Semester(2017, SemesterType.FIRSTSEMESTER);
 		Semester semester2 = new Semester(2017, SemesterType.SECONDSEMESTER);
@@ -61,10 +61,11 @@ public class StudentTest {
 //		student.enlist(IF);
 //		student.enlist(IG);
 		
-	}
+	}*/
 	
 	@Test
-	public void enlist_Onesection(){
+	public void enlist_OneSection()
+	{
 		Student student = new Student(1);
 		
 		Collection<String> prerequisites1 = new ArrayList();
@@ -99,10 +100,34 @@ public class StudentTest {
 		student.enlist(section1);
 	}
 	
+	@Test
+	@Ignore
+	public void enlist_TwoSection_SameSubject_SameSemester_SameSchedule_SameRoom(){
+		Student student = new Student(1);
+		
+		Collection<String> prerequisites1 = new ArrayList();
+		
+		Subject eng1 = new Subject("ENG1", prerequisites1);
+		
+		Semester semester1 = new Semester(2017, SemesterType.FIRSTSEMESTER);
+
+		Schedule schedule = new Schedule(Days.MON_THU, Periods.H0830_H1000);
+		
+		Room room = new Room("1A", 10);
+		
+		
+		Section section1 = new Section("ABC123", eng1, semester1, schedule, room);
+		Section section2 = new Section("DEF456", eng1, semester1, schedule, room);
+
+		student.enlist(section1);
+		student.close();
+		student.enlist(section2);
+	}
+	
 	
 	@Test
 	@Ignore
-	public void enlist_TwoSection_SameSemester_withOneIsPrerequisitetoTheOther(){
+	public void enlist_TwoSection_differentSemester_withOneIsPrerequisitetoTheOther(){
 		Student student = new Student(1);
 		
 		Collection<String> prerequisites1 = new ArrayList();
@@ -124,7 +149,12 @@ public class StudentTest {
 		Section section2 = new Section("DEF456", math2, semester2, schedule, room);
 
 		student.enlist(section1);
+		student.close();
 		student.enlist(section2);
 	}
+	
+	
 
+	
+	
 }

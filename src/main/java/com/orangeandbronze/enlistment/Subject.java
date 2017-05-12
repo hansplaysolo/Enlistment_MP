@@ -73,7 +73,7 @@ public class Subject {
 
 	@Override
 	public String toString() {
-		return "Subject [subjectID=" + subjectID + ", prerequisite=" + prerequisite + "]";
+		return subjectID;
 	}
 
 }
