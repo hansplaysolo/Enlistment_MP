@@ -19,17 +19,19 @@ public class EnlistmentForSemester {
 	}
 	
 	public boolean isOpen(){
+		
 		if (semesterState == SemesterState.OPEN) {
 			return true;
 		}else{
 			return false;
 		}
+		
 	}
 	
 	public void addStudentSection(Student student, Section section){
 		
 		if (this.enlistedSection.contains(section)) {
-			throw new EnlistmentConflictingException("This " + section + " is already inside of " + this);
+			throw new EnlistmentForSemesterSameSectionException("This " + section + " is already inside of " + this);
 		}
 		
 		boolean matchSuccess = false;
@@ -56,11 +58,10 @@ public class EnlistmentForSemester {
 	
 	public void closeSemester(){
 		this.semesterState = semesterState.CLOSED;
-	}
-	
+	}	
 	@Override
 	public String toString() {
-		return "EnlistmentForSemester [semesterState=" + semesterState + ", enlistedSection=" + enlistedSection + "]";
+		return " [Semester: " + semesterState + ", enlistedSection=" + enlistedSection + "]";
 	}
 
 }

@@ -55,7 +55,7 @@ public class StudentTest {
 		student.enlist(IA);
 		student.enlist(IB);
 		student.enlist(IC);
-		student.close();
+		
 		
 //		student.enlist(IE);
 //		student.enlist(IF);
@@ -81,7 +81,7 @@ public class StudentTest {
 		assertEquals(1,student.getStudentSemesterRecords().size());
 	}
 	
-	@Test(expected=SubjectException.class)
+	@Test(expected=SubjectConflictException.class)
 	public void enlist_Onesection_withUntakenPrerequisite(){
 		Student student = new Student(1);
 		

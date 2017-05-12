@@ -35,7 +35,7 @@ public class Subject {
 	public void conflictWith(Subject other){
 		
 		if (this.subjectID.equals(other.subjectID)) {
-			throw new SubjectException("This " + this + " is in confict with " + other);
+			throw new SubjectConflictException("This " + this + " is in confict with " + other);
 		}
 
 	}

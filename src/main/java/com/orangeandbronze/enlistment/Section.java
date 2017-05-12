@@ -28,7 +28,7 @@ public class Section {
 	public void incrementNumberOfStudents(Student student){
 		
 		if (students.size() >= room.getCapacity()) {
-			throw new RoomCapacityException("Cannot add more students inside this " + 
+			throw new RoomExceedCapacityException("Cannot add more students inside this " + 
 											room.getName() + " room. Section Capacity: " + 
 											students.size() + " Room Capacity: " + 
 											room.getCapacity());
@@ -80,7 +80,7 @@ public class Section {
 		for (String requirements : this.subject.getPrequisite()) {
 			if (!requirements.equals("NONE")) {
 				if (!matchSuccess) {
-					throw new SubjectException("The student does not have this prerequisite subject: " + this.subject.getPrequisite());
+					throw new SubjectConflictException("The student does not have this prerequisite subject: " + this.subject.getPrequisite());
 				}
 			}
 		}
