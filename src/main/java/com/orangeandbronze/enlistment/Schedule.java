@@ -7,6 +7,10 @@ public class Schedule {
 	private final Time endTime;
 	
 	public Schedule(Days days, Time startTime, Time endTime){
+		if(startTime.ordinal() >= endTime.ordinal()){
+			throw new ScheduleConflictException("End time: " + endTime +"must be later than start time: " + startTime);
+		}
+		
 		this.days = days;
 		this.startTime = startTime;
 		this.endTime = endTime;
