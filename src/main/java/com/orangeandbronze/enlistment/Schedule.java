@@ -17,22 +17,31 @@ public class Schedule {
 	}
 
 	public void conflictWith(Schedule other){
+		
+		if (this.equals(other)) {
+			throw new ScheduleConflictException("Same schedule with other section");
+		}
+		
+		if(this.days == other.days) {
+			
+			
+			if (otherST > thisST && otherST < thisET ) {
+				throw new ScheduleConflictException("Start time: " + other.startTime + " is overlapping in schedule " + this.startTime + "-" +this.endTime);
+			}else if (otherET > thisST && otherET < thisET ) {
+				throw new ScheduleConflictException("End time: " + other.endTime + "is overlapping in the schedule " + this.startTime +"-"+this.endTime);
+			}
+		}
+		
+	}
+	
+	private boolean isBetween(Schedule other) {
 		int thisST = this.startTime.ordinal();
 		int thisET = this.endTime.ordinal();
 		int otherST = other.startTime.ordinal();
 		int otherET = other.endTime.ordinal();
 		
-		if (this.equals(other)) {
-			throw new ScheduleConflictException("Same schedule with other section");
-		}
-
-		if(this.days == other.days){
-			if (otherST > thisST && otherST < thisET ) {
-			throw new ScheduleConflictException("Start time: " + other.startTime + " is overlapping in schedule " + this.startTime + "-" +this.endTime);
-			}else if (otherET > thisST && otherET < thisET ) {
-			throw new ScheduleConflictException("End time: " + other.endTime + "is overlapping in the schedule " + this.startTime +"-"+this.endTime);
-			}
-		}
+		if ( (otherST > thisST && otherST < thisET) || (otherET > thisST && otherET < thisET) )
+			return true;
 	}
 	
 	@Override
@@ -54,7 +63,7 @@ public class Schedule {
 		if (getClass() != obj.getClass())
 			return false;
 		Schedule other = (Schedule) obj;
-		if (days != other.days)
+		if (days == other.days)
 			return false;
 		if (startTime != other.startTime && endTime != other.endTime)
 			return false;
