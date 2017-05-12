@@ -18,7 +18,6 @@ public class EnlistmentForSemester {
 		
 	}
 	
-	
 	public boolean isOpen(){
 		
 		if (semesterState == SemesterState.OPEN) {

@@ -151,7 +151,6 @@ public class StudentTest {
 		Section section2 = new Section("DEF456", math2, semester2, schedule, room);
 
 		student.enlist(section1);
-		student.close();
 		student.enlist(section2);
 	}
 	

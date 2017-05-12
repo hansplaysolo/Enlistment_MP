@@ -14,10 +14,9 @@ public class Schedule {
 
 	public void conflictWith(Schedule other){
 		if (this.equals(other)) {
-			throw new ScheduleConflictException("\n" + 
-													"This " + this + 
-													" is in confict with another schedule " +
-													"Was: " + other);
+
+			
+			
 		}
 	}
 	

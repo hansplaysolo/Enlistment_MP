@@ -1,7 +1,5 @@
 package com.orangeandbronze.enlistment;
 
-
-//TODO change name please!!!!!!
 public enum Time {
 	H0800, H0830,
 	H0900, H0930,

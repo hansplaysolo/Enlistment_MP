@@ -10,13 +10,14 @@ public class Section {
 	private final Schedule schedule;
 	private final Room room;
 	private final Semester semester;
-	private Collection<Student> students = new HashSet<Student>(); 
+	private final Collection<Student> students = new HashSet<Student>(); 
 	
 	public Section(String sectionID, Subject subject, Semester semester, Schedule schedule, Room room) {
 		
 		if (!sectionID.matches("[a-zA-Z0-9]+")) {
 			throw new IllegalArgumentException("Section ID should be alpha-numeric. Was: " + sectionID);
 		}
+		
 		this.sectionID = sectionID;
 		this.subject = subject;
 		this.schedule = schedule;
@@ -27,22 +28,9 @@ public class Section {
 	
 	public void incrementNumberOfStudents(Student student){
 		
-		if (students.size() >= room.getCapacity()) {
-			throw new RoomExceedCapacityException("Cannot add more students inside this " + 
-											room.getName() + " room. Section Capacity: " + 
-											students.size() + " Room Capacity: " + 
-											room.getCapacity());
-		}
+		room.exceedCapacity(students.size());
 		students.add(student);
 		
-	}
-	
-	public void hasSemesterSubjectConflict(Section other){
-		this.semester.conflictWith(other.semester);
-	}
-	
-	public void hasSemesterConflict(Section other){
-		this.semester.conflictWith(other.semester);
 	}
 	
 	public void hasSubjectConflict(Section other){
@@ -118,9 +106,7 @@ public class Section {
 
 	@Override
 	public String toString() {
-		return "Section [sectionID=" + sectionID + ", subject=" + subject + "]";
+		return "SectionID: " + sectionID + ", Subject: " + subject;
 	}
-	
-	
 	
 }
