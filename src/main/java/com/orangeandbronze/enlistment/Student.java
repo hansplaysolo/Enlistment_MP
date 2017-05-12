@@ -50,26 +50,22 @@ public class Student {
 			addNewEnlistmentForSemester(section);
 		}
 		
-		System.out.println(studentSemesterRecords.toString());
 	}
-	
+
 	private void addNewEnlistmentForSemester(Section section){
 		EnlistmentForSemester record = new EnlistmentForSemester(SemesterState.OPEN);
 		isNull(record);
 		record.addStudentSection(this, section);
-		studentSemesterRecords.add(record);
+		addStudentSemesterRecord(record);
 	}
 	
-	//Temporary method
-	public void close(){
-		for (EnlistmentForSemester en : studentSemesterRecords) {
-			en.closeSemester();
-		}
+	public void addStudentSemesterRecord(EnlistmentForSemester record) {
+		studentSemesterRecords.add(record);
 	}
 	
 	private void isNull(EnlistmentForSemester record) {
 		if (Objects.isNull(record)) {
-			throw new NullPointerException("Initialize EnlistmentForSemester record first");
+			throw new EnlistmentForSemesterNullPointerException("Initialize EnlistmentForSemester record first");
 		}
 	}
 

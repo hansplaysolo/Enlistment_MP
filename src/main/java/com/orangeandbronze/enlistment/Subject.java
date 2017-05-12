@@ -35,7 +35,7 @@ public class Subject {
 	public void conflictWith(Subject other){
 		
 		if (this.subjectID.equals(other.subjectID)) {
-			throw new SubjectException("You have already been enlisted to " + this);
+			throw new SubjectConflictException("This " + this + " is in confict with " + other);
 		}
 
 	}
