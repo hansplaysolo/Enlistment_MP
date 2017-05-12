@@ -88,7 +88,6 @@ public class StudentTest {
 		
 		Collection<String> prerequisites1 = new ArrayList();
 		
-		//Subject math1 = new Subject("ENG2", prerequisites1);
 		prerequisites1.add("ENG1");
 		Subject math2 = new Subject("ENG2", prerequisites1);
 		Semester semester = new Semester(2017, SemesterType.FIRSTSEMESTER);
@@ -100,7 +99,7 @@ public class StudentTest {
 		student.enlist(section1);
 	}
 	
-	@Test
+	@Test(expected=SubjectConflictException.class)
 	public void enlist_TwoSection_SameSubject_SameSemester_SameSchedule_SameRoom(){
 		Student student = new Student(1);
 		
@@ -124,11 +123,36 @@ public class StudentTest {
 	}
 	
 	
+	@Test(expected=SubjectConflictException.class)
+	public void enlist_TwoSection_SameSemester_WithOneIsPrerequisitetoTheOther(){
+		Student student = new Student(1);
+		
+		Collection<String> prerequisites1 = new ArrayList();
+		
+		Subject eng1 = new Subject("ENG1", prerequisites1);
+		
+		prerequisites1.add("ENG1");
+		Subject eng2 = new Subject("ENG2", prerequisites1);
+		
+		Semester semester1 = new Semester(2017, SemesterType.FIRSTSEMESTER);
+		
+		Schedule schedule = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
+		
+		Room room = new Room("1A", 10);
+		
+		
+		
+		Section section1 = new Section("ABC123", eng1, semester1, schedule, room);
+		Section section2 = new Section("DEF456", eng2, semester1, schedule, room);
+
+		student.enlist(section1);
+		student.enlist(section2);
+	}
+	
 	
 	
 	
 	@Test
-	@Ignore
 	public void enlist_TwoSection_differentSemester_withOneIsPrerequisitetoTheOther(){
 		Student student = new Student(1);
 		
@@ -145,13 +169,13 @@ public class StudentTest {
 		
 		Room room = new Room("1A", 10);
 		
-		
-		
 		Section section1 = new Section("ABC123", eng1, semester1, schedule, room);
 		Section section2 = new Section("DEF456", math2, semester2, schedule, room);
+		
+		EnlistmentForSemester efs = new EnlistmentForSemester(SemesterState.CLOSED);
+		efs.addStudentSection(student, section1);
+		student.addStudentSemesterRecord(efs);
 
-		student.enlist(section1);
-		student.close();
 		student.enlist(section2);
 	}
 	

@@ -59,7 +59,8 @@ public class EnlistmentForSemester {
 	
 	public void closeSemester(){
 		this.semesterState = semesterState.CLOSED;
-	}	
+	}
+	
 	@Override
 	public String toString() {
 		return " [Semester: " + semesterState + ", enlistedSection=" + enlistedSection + "]";
