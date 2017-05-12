@@ -11,7 +11,6 @@ public class ScheduleTest {
 		Schedule schedule1 = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
 		Schedule schedule2 = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
 		
-		//TODO edit conflictWith method
 		schedule1.conflictWith(schedule2);
 	}
 
