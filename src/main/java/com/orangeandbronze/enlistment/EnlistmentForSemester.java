@@ -38,7 +38,7 @@ public class EnlistmentForSemester {
 		for (EnlistmentForSemester en : student.getStudentSemesterRecords()) {
 			if (en.semesterState == SemesterState.CLOSED) {
 				for (Section sc : en.getEnlistedSection()) {
-					sc.hasSubjectConflict(section);
+					sc.checkSubjectConflict(section);
 					//sc.hasSemesterConflict(section);
 					matchSuccess = sc.checkSubjectPrerequisite(en.getEnlistedSection(), section);
 				}

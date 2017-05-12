@@ -33,11 +33,11 @@ public class Section {
 		
 	}
 	
-	public void hasSubjectConflict(Section other){
+	public void checkSubjectConflict(Section other){
 		this.subject.conflictWith(other.subject);
 	}
 	
-	public void hasScheduleConflict(Section other){
+	public void checkScheduleConflict(Section other){
 		this.schedule.conflictWith(other.schedule);
 	}
 	
@@ -75,8 +75,8 @@ public class Section {
 	}
 	
 	public void hasConflict(Section other){
-		hasSubjectConflict(other);
-		hasScheduleConflict(other);
+		checkSubjectConflict(other);
+		checkScheduleConflict(other);
 	}
 
 	@Override

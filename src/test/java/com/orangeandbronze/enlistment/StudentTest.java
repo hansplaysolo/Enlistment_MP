@@ -178,8 +178,6 @@ public class StudentTest {
 
 		student.enlist(section2);
 	}
-	
-	
 
 	
 	
