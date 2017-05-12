@@ -19,22 +19,18 @@ public class Schedule {
 	public void conflictWith(Schedule other){
 		int thisST = this.startTime.ordinal();
 		int thisET = this.endTime.ordinal();
-		
 		int otherST = other.startTime.ordinal();
 		int otherET = other.endTime.ordinal();
-		
-		if (this.equals(other)) {
-			throw new ScheduleConflictException("");
-		}
-		
-		if (otherST > thisST && otherST < thisET ) {
-			throw new ScheduleConflictException("");
-		}
-		
-		if (otherET > thisST && otherET < thisET ) {
-			throw new ScheduleConflictException("");
-		}
 
+		if (this.equals(other)) 
+			throw new ScheduleConflictException("");
+		
+		if (otherST > thisST && otherST < thisET ) 
+			throw new ScheduleConflictException("");
+		
+		if (otherET > thisST && otherET < thisET ) 
+			throw new ScheduleConflictException("");
+		
 		
 	}
 	
