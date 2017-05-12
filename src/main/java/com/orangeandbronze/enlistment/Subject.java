@@ -35,7 +35,7 @@ public class Subject {
 	public void conflictWith(Subject other){
 		
 		if (this.subjectID.equals(other.subjectID)) {
-			throw new SubjectException("This " + this + " is in confict with " + other);
+			throw new SubjectException("You have already been enlisted to " + this);
 		}
 
 	}
@@ -73,7 +73,7 @@ public class Subject {
 
 	@Override
 	public String toString() {
-		return "Subject [subjectID=" + subjectID + ", prerequisite=" + prerequisite + "]";
+		return subjectID;
 	}
 
 }

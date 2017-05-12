@@ -25,6 +25,10 @@ public class Student {
 		
 	}
 	
+	public void setStudentSemesterRecords(Collection<EnlistmentForSemester> finishedSections){
+		studentSemesterRecords.addAll(finishedSections);
+	}
+	
 	public void enlist(Section section){
 		
 		boolean newSemester = true;

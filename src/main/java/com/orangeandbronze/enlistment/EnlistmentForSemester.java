@@ -7,16 +7,22 @@ public class EnlistmentForSemester {
 
 	private SemesterState semesterState;
 	private final Collection<Section> enlistedSection = new HashSet<>();
+	private Semester semester;
 	
 	public EnlistmentForSemester(SemesterState semesterState) {
 		this.semesterState = semesterState;
 	}
+	
+//	public EnlistmentForSemester(Semester semester){
+//		this.semester = semester;
+//	}
 	
 	public Collection<Section> getEnlistedSection(){
 		
 		return new HashSet<>(enlistedSection);
 		
 	}
+	
 	
 	public boolean isOpen(){
 		if (semesterState == SemesterState.OPEN) {
