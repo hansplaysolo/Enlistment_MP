@@ -1,9 +1,12 @@
 package com.orangeandbronze.enlistment;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class StudentTest {
@@ -57,6 +60,70 @@ public class StudentTest {
 		student.enlist(IE);
 		student.enlist(IF);
 		student.enlist(IG);
+	}
+	
+	@Test
+	public void enlist_Onesection(){
+		Student student = new Student(1);
+		
+		Collection<String> prerequisites1 = new ArrayList();
+		Subject math1 = new Subject("MATH1", prerequisites1);
+		
+		Semester semester = new Semester(2017, SemesterType.FIRSTSEMESTER);
+		Schedule schedule = new Schedule(Days.MON_THU, Periods.H0830_H1000);
+		Room room = new Room("1A", 10);
+		
+		Section section1 = new Section("ABC123", math1, semester, schedule, room);
+		
+		student.enlist(section1);
+		
+		assertEquals(1,student.getStudentSemesterRecords().size());
+	}
+	
+	@Test(expected=SubjectException.class)
+	public void enlist_Onesection_withUntakenPrerequisite(){
+		Student student = new Student(1);
+		
+		Collection<String> prerequisites1 = new ArrayList();
+		
+		//Subject math1 = new Subject("ENG2", prerequisites1);
+		prerequisites1.add("ENG1");
+		Subject math2 = new Subject("ENG2", prerequisites1);
+		Semester semester = new Semester(2017, SemesterType.FIRSTSEMESTER);
+		Schedule schedule = new Schedule(Days.MON_THU, Periods.H0830_H1000);
+		Room room = new Room("1A", 10);
+		
+		Section section1 = new Section("ABC123", math2, semester, schedule, room);
+		
+		student.enlist(section1);
+	}
+	
+	
+	@Test
+	@Ignore
+	public void enlist_TwoSection_SameSemester_withOneIsPrerequisitetoTheOther(){
+		Student student = new Student(1);
+		
+		Collection<String> prerequisites1 = new ArrayList();
+		
+		Subject eng1 = new Subject("ENG1", prerequisites1);
+		prerequisites1.add("ENG1");
+		Subject math2 = new Subject("ENG2", prerequisites1);
+		
+		Semester semester1 = new Semester(2017, SemesterType.FIRSTSEMESTER);
+		Semester semester2 = new Semester(2017, SemesterType.SECONDSEMESTER);
+
+		Schedule schedule = new Schedule(Days.MON_THU, Periods.H0830_H1000);
+		
+		Room room = new Room("1A", 10);
+		
+		
+		
+		Section section1 = new Section("ABC123", eng1, semester1, schedule, room);
+		Section section2 = new Section("DEF456", math2, semester2, schedule, room);
+
+		student.enlist(section1);
+		student.enlist(section2);
 	}
 
 }
