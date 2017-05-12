@@ -32,7 +32,7 @@ public class Student {
 	public void enlist(Section section){
 		
 		boolean newSemester = true;
-		if (studentSemesterRecords.size() > 0) {
+		if (studentSemesterRecords.size() >= 0) {
 			for (EnlistmentForSemester record : studentSemesterRecords) {
 				isNull(record);
 				if (record.isOpen()) {

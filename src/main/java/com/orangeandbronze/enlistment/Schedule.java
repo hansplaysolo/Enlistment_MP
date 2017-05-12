@@ -26,11 +26,11 @@ public class Schedule {
 			throw new ScheduleConflictException("Same schedule with other section");
 		}
 
-		if (this.days == other.days) {
-			if ( (otherST > thisST && otherST < thisET) ) {
-				throw new ScheduleConflictException("Start time: " + other.startTime + " is overlapping in schedule " + this.startTime + "-" +this.endTime);
+		if(this.days == other.days){
+			if (otherST > thisST && otherST < thisET ) {
+			throw new ScheduleConflictException("Start time: " + other.startTime + " is overlapping in schedule " + this.startTime + "-" +this.endTime);
 			}else if (otherET > thisST && otherET < thisET ) {
-				throw new ScheduleConflictException("End time: " + other.endTime + "is overlapping in the schedule " + this.startTime +"-"+this.endTime);
+			throw new ScheduleConflictException("End time: " + other.endTime + "is overlapping in the schedule " + this.startTime +"-"+this.endTime);
 			}
 		}
 	}
