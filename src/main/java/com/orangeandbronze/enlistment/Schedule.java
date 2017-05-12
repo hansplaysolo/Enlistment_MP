@@ -52,7 +52,7 @@ public class Schedule {
 		if (getClass() != obj.getClass())
 			return false;
 		Schedule other = (Schedule) obj;
-		if (days == other.days)
+		if (days != other.days)
 			return false;
 		if (startTime != other.startTime && endTime != other.endTime)
 			return false;
