@@ -15,7 +15,10 @@ public class Section {
 	public Section(String sectionID, Subject subject, Semester semester, Schedule schedule, Room room) {
 		
 		if (!sectionID.matches("[a-zA-Z0-9]+")) {
-			throw new IllegalArgumentException("Section ID should be alpha-numeric. Was: " + sectionID);
+			throw new IllegalArgumentException("\n" + 
+										      "SectionID should be alpha-numeric. " +
+										      "SectionID input: " + sectionID +
+										      "\n");
 		}
 		
 		this.sectionID = sectionID;
@@ -68,7 +71,10 @@ public class Section {
 		for (String requirements : this.subject.getPrequisite()) {
 			if (!requirements.equals("NONE")) {
 				if (!matchSuccess) {
-					throw new SubjectConflictException("The student does not have this prerequisite subject: " + this.subject.getPrequisite());
+					throw new SubjectConflictException("\n" + 
+													   "The student does not have this prerequisite subject: " + 
+													   	this.subject.getPrequisite() + 
+													   "\n");
 				}
 			}
 		}

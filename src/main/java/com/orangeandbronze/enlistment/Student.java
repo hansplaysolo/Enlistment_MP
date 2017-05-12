@@ -93,8 +93,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [studentNumber=" + studentNumber + "]";
+		return "Student number: " + studentNumber;
 	}
-	
 	
 }
