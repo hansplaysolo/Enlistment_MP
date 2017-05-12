@@ -1,7 +1,6 @@
 package com.orangeandbronze.enlistment;
 
-public enum Term {
+public enum SemesterType {
 	FIRSTSEMESTER,
 	SECONDSEMESTER,
-	THIRDSEMESTER
 }

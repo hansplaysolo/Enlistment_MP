@@ -2,12 +2,23 @@ package com.orangeandbronze.enlistment;
 
 public class Semester {
 	
-	private int schoolYear;
-	private Term term; 
+	private final int schoolYear;
+	private final SemesterType type; 
 	
-	public Semester(int schoolYear, Term term){
+	public Semester(int schoolYear, SemesterType term){
 		this.schoolYear = schoolYear;
-		this.term = term;
+		this.type = term;
+	}
+	
+	public void conflictWith(Semester other){
+		if (this.equals(other)) {
+			throw new SemesterConflictingException("This " + this + " is in confict with " + other);
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Semester [schoolYear=" + schoolYear + ", type=" + type + "]";
 	}
 
 	@Override
@@ -15,7 +26,7 @@ public class Semester {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + schoolYear;
-		result = prime * result + ((term == null) ? 0 : term.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -30,13 +41,8 @@ public class Semester {
 		Semester other = (Semester) obj;
 		if (schoolYear != other.schoolYear)
 			return false;
-		if (term != other.term)
+		if (type != other.type)
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Semester [schoolYear=" + schoolYear + ", term=" + term + "]";
 	}
 }
