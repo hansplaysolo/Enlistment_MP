@@ -87,8 +87,8 @@ public class Section {
 	}
 	
 	public void hasConflict(Section other){
-		hasScheduleConflict(other);
 		hasSubjectConflict(other);
+		hasScheduleConflict(other);
 	}
 
 	@Override

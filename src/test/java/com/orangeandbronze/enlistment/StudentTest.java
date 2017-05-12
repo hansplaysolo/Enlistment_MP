@@ -1,6 +1,5 @@
 package com.orangeandbronze.enlistment;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -34,12 +33,12 @@ public class StudentTest {
 		Subject subjectEng3 = new Subject("English03", Arrays.asList("ENGLISH01", "ENGLISH02"));
 		Subject subjectPE3 = new Subject("PE03", Arrays.asList("PE01", "PE02"));
 		
-		Schedule schedule1 = new Schedule(Days.MON_THU, Periods.H0830_H1000);
-		Schedule schedule2 = new Schedule(Days.TUE_FRI, Periods.H1000_H1130);
-		Schedule schedule3 = new Schedule(Days.WED_SAT, Periods.H1100_H1430);
-		Schedule schedule4 = new Schedule(Days.MON_THU, Periods.H1130_H1100);
-		Schedule schedule5 = new Schedule(Days.TUE_FRI, Periods.H1430_H1600);
-		Schedule schedule6 = new Schedule(Days.WED_SAT, Periods.H1600_H1730);
+		Schedule schedule1 = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
+		Schedule schedule2 = new Schedule(Days.TUE_FRI, Time.H1000, Time.H1200);
+		Schedule schedule3 = new Schedule(Days.WED_SAT, Time.H1200, Time.H1400);
+		Schedule schedule4 = new Schedule(Days.MON_THU, Time.H1400, Time.H1600);
+		Schedule schedule5 = new Schedule(Days.TUE_FRI, Time.H1600, Time.H1800);
+		Schedule schedule6 = new Schedule(Days.WED_SAT, Time.H0800, Time.H1000);
 		
 		Room room1 = new Room("Room1", 5);
 		Room room2 = new Room("Room2", 5);
@@ -58,9 +57,9 @@ public class StudentTest {
 		student.enlist(IC);
 		student.close();
 		
-		student.enlist(IE);
-		student.enlist(IF);
-		student.enlist(IG);
+//		student.enlist(IE);
+//		student.enlist(IF);
+//		student.enlist(IG);
 		
 	}
 	
@@ -72,7 +71,7 @@ public class StudentTest {
 		Subject math1 = new Subject("MATH1", prerequisites1);
 		
 		Semester semester = new Semester(2017, SemesterType.FIRSTSEMESTER);
-		Schedule schedule = new Schedule(Days.MON_THU, Periods.H0830_H1000);
+		Schedule schedule = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
 		Room room = new Room("1A", 10);
 		
 		Section section1 = new Section("ABC123", math1, semester, schedule, room);
@@ -92,7 +91,7 @@ public class StudentTest {
 		prerequisites1.add("ENG1");
 		Subject math2 = new Subject("ENG2", prerequisites1);
 		Semester semester = new Semester(2017, SemesterType.FIRSTSEMESTER);
-		Schedule schedule = new Schedule(Days.MON_THU, Periods.H0830_H1000);
+		Schedule schedule = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
 		Room room = new Room("1A", 10);
 		
 		Section section1 = new Section("ABC123", math2, semester, schedule, room);
@@ -115,7 +114,7 @@ public class StudentTest {
 		Semester semester1 = new Semester(2017, SemesterType.FIRSTSEMESTER);
 		Semester semester2 = new Semester(2017, SemesterType.SECONDSEMESTER);
 
-		Schedule schedule = new Schedule(Days.MON_THU, Periods.H0830_H1000);
+		Schedule schedule = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
 		
 		Room room = new Room("1A", 10);
 		
