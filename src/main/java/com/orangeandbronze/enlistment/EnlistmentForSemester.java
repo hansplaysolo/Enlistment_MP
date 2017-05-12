@@ -31,7 +31,7 @@ public class EnlistmentForSemester {
 	public void addStudentSection(Student student, Section section){
 		
 		if (this.enlistedSection.contains(section)) {
-			throw new EnlistmentForSemesterSameSectionException("This " + section + " is already inside of " + this);
+			throw new EnlistmentForSemesterSameSectionException("This " + section + " is already inside of " + this.enlistedSection);
 		}
 		
 		boolean matchSuccess = false;

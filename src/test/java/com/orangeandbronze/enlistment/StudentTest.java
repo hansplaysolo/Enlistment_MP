@@ -180,5 +180,23 @@ public class StudentTest {
 	}
 
 	
+	@Test(expected=EnlistmentForSemesterSameSectionException.class)
+	public void enlist_SameSection(){
+		Student student = new Student(1);
+		
+		Collection<String> prerequisites1 = new ArrayList();
+		Subject math1 = new Subject("MATH1", prerequisites1);
+		
+		Semester semester = new Semester(2017, SemesterType.FIRSTSEMESTER);
+		Schedule schedule = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
+		Room room = new Room("1A", 10);
+		
+		Section section1 = new Section("ABC123", math1, semester, schedule, room);
+		
+		student.enlist(section1);
+		student.enlist(section1);
+
+	}
+	
 	
 }
