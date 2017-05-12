@@ -10,15 +10,9 @@ public class Semester {
 		this.type = term;
 	}
 	
-	public void conflictWith(Semester other){
-		if (this.equals(other)) {
-			throw new SemesterConflictingException("This " + this + " is in confict with " + other);
-		}
-	}
-	
 	@Override
 	public String toString() {
-		return "Semester [schoolYear=" + schoolYear + ", type=" + type + "]";
+		return type + ", School year: " + schoolYear;
 	}
 
 	@Override

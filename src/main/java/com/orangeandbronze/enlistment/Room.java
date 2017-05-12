@@ -7,24 +7,30 @@ public class Room {
 	
 	public Room(String name, int capacity){
 		if (!name.matches("[A-Za-z0-9]+")) {
-			throw new IllegalArgumentException("Room name should be alpha-numeric. Was: " + name);
+			throw new IllegalArgumentException("\n" + 
+											   "Room name should be alpha-numeric. " +
+											   "\n" + 
+											   "Room name input: " + name);
 		}
 		
 		this.name = name;
 		this.capacity = capacity;
 	}
 	
-	public String getName() {
-		return name;
-	}
-
-	public int getCapacity() {
-		return capacity;
+	public void exceedCapacity(int size){
+		if (size >= this.capacity) {
+			throw new RoomExceedCapacityException("\n" + 
+												  "Cannot add more students inside this " + 
+												  name + " room. " + 
+												  "\n" + 
+												  "Current capacity: " + size + " Room Capacity: " + capacity + 
+												  "\n");
+		}
 	}
 
 	@Override
 	public String toString() {
-		return "Room [name=" + name + ", capacity=" + capacity + "]";
+		return "Room name: " + name + ", Room capacity: " + capacity;
 	}
 
 	@Override
