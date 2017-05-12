@@ -101,7 +101,6 @@ public class StudentTest {
 	}
 	
 	@Test
-	@Ignore
 	public void enlist_TwoSection_SameSubject_SameSemester_SameSchedule_SameRoom(){
 		Student student = new Student(1);
 		
@@ -111,7 +110,7 @@ public class StudentTest {
 		
 		Semester semester1 = new Semester(2017, SemesterType.FIRSTSEMESTER);
 
-		Schedule schedule = new Schedule(Days.MON_THU, Periods.H0830_H1000);
+		Schedule schedule = new Schedule(Days.MON_THU, Time.H0800, Time.H1000);
 		
 		Room room = new Room("1A", 10);
 		
@@ -120,9 +119,12 @@ public class StudentTest {
 		Section section2 = new Section("DEF456", eng1, semester1, schedule, room);
 
 		student.enlist(section1);
-		student.close();
+		//student.close();
 		student.enlist(section2);
 	}
+	
+	
+	
 	
 	
 	@Test

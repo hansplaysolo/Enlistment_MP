@@ -7,15 +7,11 @@ public class EnlistmentForSemester {
 
 	private SemesterState semesterState;
 	private final Collection<Section> enlistedSection = new HashSet<>();
-	private Semester semester;
 	
 	public EnlistmentForSemester(SemesterState semesterState) {
 		this.semesterState = semesterState;
 	}
 	
-//	public EnlistmentForSemester(Semester semester){
-//		this.semester = semester;
-//	}
 	
 	public Collection<Section> getEnlistedSection(){
 		
@@ -42,8 +38,8 @@ public class EnlistmentForSemester {
 		for (EnlistmentForSemester en : student.getStudentSemesterRecords()) {
 			if (en.semesterState == SemesterState.CLOSED) {
 				for (Section sc : en.getEnlistedSection()) {
-					sc.hasSemesterConflict(section);
 					sc.hasSubjectConflict(section);
+					//sc.hasSemesterConflict(section);
 					matchSuccess = sc.checkSubjectPrerequisite(en.getEnlistedSection(), section);
 				}
 			}
