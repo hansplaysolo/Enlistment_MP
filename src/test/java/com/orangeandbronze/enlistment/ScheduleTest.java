@@ -35,7 +35,6 @@ public class ScheduleTest {
 	}
 	
 	@Test
-	@Ignore
 	public void overlappingStartTime_NotSameDay(){
 		Schedule schedule = new Schedule(Days.MON_THU,Time.H0800, Time.H1000);
 		Schedule otherSchedule = new Schedule(Days.TUE_FRI, Time.H0830,Time.H1100);
