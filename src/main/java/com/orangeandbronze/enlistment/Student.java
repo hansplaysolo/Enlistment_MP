@@ -49,7 +49,6 @@ public class Student {
 		}else{
 			addNewEnlistmentForSemester(section);
 		}
-		
 	}
 
 	private void addNewEnlistmentForSemester(Section section){

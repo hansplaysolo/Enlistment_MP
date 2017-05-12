@@ -1,7 +1,6 @@
 package com.orangeandbronze.enlistment;
 
-import static org.junit.Assert.*;
-
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class ScheduleTest {
@@ -31,6 +30,14 @@ public class ScheduleTest {
 	public void overlappingEndTime_SameDay(){
 		Schedule schedule = new Schedule(Days.MON_THU,Time.H1000, Time.H1200);
 		Schedule otherSchedule = new Schedule(Days.MON_THU, Time.H0800,Time.H1030);
+		
+		schedule.conflictWith(otherSchedule);
+	}
+	
+	@Test
+	public void overlappingStartTime_NotSameDay(){
+		Schedule schedule = new Schedule(Days.MON_THU,Time.H0800, Time.H1000);
+		Schedule otherSchedule = new Schedule(Days.TUE_FRI, Time.H0830,Time.H1100);
 		
 		schedule.conflictWith(otherSchedule);
 	}
