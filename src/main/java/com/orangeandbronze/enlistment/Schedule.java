@@ -1,17 +1,23 @@
 package com.orangeandbronze.enlistment;
 
 public class Schedule {
+
 	private final Days days;
-	private final Periods periods;
+	private final Time startTime;
+	private final Time endTime;
 	
-	public Schedule(Days days, Periods periods) {
+	public Schedule(Days days, Time startTime, Time endTime){
 		this.days = days;
-		this.periods = periods;
+		this.startTime = startTime;
+		this.endTime = endTime;
 	}
-	
+
 	public void conflictWith(Schedule other){
 		if (this.equals(other)) {
-			throw new ScheduleConflictingException("This " + this + " is in confict with " + other);
+			throw new ScheduleConflictingException("\n" + 
+													"This " + this + 
+													" is in confict with another schedule " +
+													"Was: " + other);
 		}
 	}
 	
@@ -20,11 +26,11 @@ public class Schedule {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((days == null) ? 0 : days.hashCode());
-		result = prime * result + ((periods == null) ? 0 : periods.hashCode());
+		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
+		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
 		return result;
 	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -36,13 +42,16 @@ public class Schedule {
 		Schedule other = (Schedule) obj;
 		if (days != other.days)
 			return false;
-		if (periods != other.periods)
+		if (endTime != other.endTime)
+			return false;
+		if (startTime != other.startTime)
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Schedule [days=" + days + ", periods=" + periods + "]";
+		return "Schedule day: " + days + " Time: " + startTime + "-" + endTime;
 	}
+	
 }
